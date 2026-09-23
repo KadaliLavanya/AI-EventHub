@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+
+        <!-- ================= NAVBAR ================= -->
+
+        <nav class="navbar">
+
+            <div class="container navbar-inner">
+
+                <a href="{{ url_for('home') }}" class="logo">
+                    AI EventHub
+                </a>
+
+                <div class="navbar-links">
+
+                    {% if logged_in %}
+
+                    <a href="{{ url_for('dashboard') }}">
+                        Dashboard
+                    </a>
+
+                    <a href="{{ url_for('events') }}">
+                        Events
+                    </a>
+
+                    <a href="{{ url_for('my_registrations') }}">
+                        My Registrations
+                    </a>
+
+                    <a href="{{ url_for('assistant') }}">
+                        AI Assistant
+                    </a>
+
+                    <a href="{{ url_for('notifications') }}">
+                        🔔 Notifications
+                    </a>
+
+                    <a href="{{ url_for('profile') }}">
+                        Profile
+                    </a>
+
+                    <a href="{{ url_for('logout') }}">
+                        Logout
+                    </a>
+
+                    {% else %}
+
+                    <a href="{{ url_for('login') }}">
+                        Login
+                    </a>
+
+                    <a href="{{ url_for('register') }}">
+                        Register
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </nav>
+        <!-- ================= MAIN ================= -->
+
+        <main class="home-page">
+
+            <!-- ================= DISCOVER BOX ================= -->
+
+            <section class="discover-box">
+
+                <div class="discover-small">
+                    🤖 SMART CAMPUS EVENTS
+                </div>
+
+                <h1>
+                    Discover Events.
+                    <br>
+                    Register & Participate.
+                </h1>
+
+                <p>
+                    Find college workshops, hackathons, coding contests
+                    and other events in one place with AI-powered
+                    recommendations.
+                </p>
+
+                <div class="discover-links">
+
+                    <a href="{{ url_for('events') }}">
+                        Explore Events
+                    </a>
+
+                    <span>🤖</span>
+
+                    <a href="{{ url_for('assistant') }}">
+                        AI Assistant
+                    </a>
+
+                </div>
+
+            </section>
+
+            <!-- ================= FEATURES ================= -->
+
+            <section class="feature-section">
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+                        📅
+                    </div>
+
+                    <h2>
+                        Discover Events
+                    </h2>
+
+                    <p>
+                        Find upcoming college events easily.
+                    </p>
+
+                </div>
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+                        📝
+                    </div>
+
+                    <h2>
+                        Easy Registration
+                    </h2>
+
+                    <p>
+                        Register for events in a few clicks.
+                    </p>
+
+                </div>
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+                        🤖
+                    </div>
+
+                    <h2>
+                        AI Recommendations
+                    </h2>
+
+                    <p>
+                        Get event suggestions based on your interests.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- ================= SIMPLE INFO ================= -->
+
+            <section class="info-box">
+
+                <h2>
+                    Everything You Need in One Place
+                </h2>
+
+                <p>
+                    Explore events, register easily, manage your registrations
+                    and get help from the AI Event Assistant.
+                </p>
+
+            </section>
+
+        </main>
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="home-footer">
+
+            <p>
+                © 2026 AI EventHub
+            </p>
+
+        </footer>
+
+    </body>
+
+</html>

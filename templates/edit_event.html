@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title>Edit Event - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body>
+
+        <nav>
+
+            <div class="logo">
+                AI EventHub Admin
+            </div>
+
+            <div class="nav-links">
+
+                <a href="/admin">
+                    Admin
+                </a>
+
+                <a href="/admin-logout">
+                    Logout
+                </a>
+
+            </div>
+
+        </nav>
+
+        <div class="register-container">
+
+            <div class="register-card">
+
+                <h1>
+                    Edit Event ✏️
+                </h1>
+
+                <p>
+                    Update event details.
+                </p>
+
+                <form method="POST">
+
+                    <label>
+                        Event Title
+                    </label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        value="{{ event['title'] }}"
+                        required>
+
+                    <label>
+                        Description
+                    </label>
+
+                    <input
+                        type="text"
+                        name="description"
+                        value="{{ event['description'] }}"
+                        required>
+
+                    <label>
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="date"
+                        value="{{ event['date'] }}"
+                        required>
+
+                    <label>
+                        Venue
+                    </label>
+
+                    <input
+                        type="text"
+                        name="venue"
+                        value="{{ event['venue'] }}"
+                        required>
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select name="category">
+
+                        <option value="AI & ML"
+                            {% if event['category'] == 'AI & ML' %}
+                            selected
+                            {% endif %}>
+
+                            AI & ML
+
+                        </option>
+
+                        <option value="Web Development"
+                            {% if event['category'] == 'Web Development' %}
+                            selected
+                            {% endif %}>
+
+                            Web Development
+
+                        </option>
+
+                        <option value="Hackathon"
+                            {% if event['category'] == 'Hackathon' %}
+                            selected
+                            {% endif %}>
+
+                            Hackathon
+
+                        </option>
+
+                        <option value="Coding"
+                            {% if event['category'] == 'Coding' %}
+                            selected
+                            {% endif %}>
+
+                            Coding
+
+                        </option>
+
+                        <option value="Workshop"
+                            {% if event['category'] == 'Workshop' %}
+                            selected
+                            {% endif %}>
+
+                            Workshop
+
+                        </option>
+
+                    </select>
+
+                    <label>
+                        Seats
+                    </label>
+
+                    <input
+                        type="number"
+                        name="seats"
+                        value="{{ event['seats'] }}"
+                        required>
+
+                    <button type="submit">
+
+                        Update Event ✏️
+
+                    </button>
+
+                    <a
+                        href="/admin"
+                        class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

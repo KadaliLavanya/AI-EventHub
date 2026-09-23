@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+        <title>AI Assistant - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body>
+
+        <nav class="top-navbar">
+
+            <div class="nav-container">
+
+                <div class="logo">
+                    AI EventHub
+                </div>
+
+                <div class="nav-menu">
+
+                    <a href="{{ url_for('home') }}">
+                        Home
+                    </a>
+
+                    <a href="{{ url_for('events') }}">
+                        Events
+                    </a>
+
+                    <a href="{{ url_for('assistant') }}">
+                        AI Assistant
+                    </a>
+
+                    {% if session.get("user_id") %}
+
+                    <a href="{{ url_for('dashboard') }}">
+                        Dashboard
+                    </a>
+
+                    {% else %}
+
+                    <a href="{{ url_for('login') }}">
+                        Login
+                    </a>
+
+                    <a href="{{ url_for('register') }}">
+                        Register
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <main class="assistant-page">
+
+            <!-- AI ASSISTANT HEADER -->
+
+            <div class="assistant-header">
+
+                <div class="assistant-icon">
+                    AI
+                </div>
+
+                <h1>
+                    AI Event Assistant
+                </h1>
+
+                <p>
+                    Ask questions about events, registration and participation.
+                </p>
+
+            </div>
+
+            <!-- CHAT BOX -->
+
+            <div class="assistant-box">
+
+                <!-- WELCOME -->
+
+                <div class="assistant-welcome">
+
+                    <h2>
+                        How can I help you?
+                    </h2>
+
+                    <p>
+                        You can ask me about upcoming events, event categories,
+                        registration and available seats.
+                    </p>
+
+                </div>
+
+                <!-- CHAT HISTORY -->
+
+                {% if answer %}
+
+                <div class="assistant-message user-message">
+
+                    <strong>
+                        You:
+                    </strong>
+
+                    <p>
+                        {{ question }}
+                    </p>
+
+                </div>
+
+                <div class="assistant-message ai-message">
+
+                    <strong>
+                        AI Assistant:
+                    </strong>
+
+                    <p>
+                        {{ answer }}
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+                <!-- ASK FORM -->
+
+                <form
+                    method="POST"
+                    action="{{ url_for('assistant') }}"
+                    class="assistant-form">
+
+                    <label>
+                        Ask your question
+                    </label>
+
+                    <textarea
+                        name="question"
+                        placeholder="Example: What AI & ML events are available?"
+                        required></textarea>
+
+                    <button
+                        type="submit">
+
+                        Ask AI Assistant
+
+                    </button>
+
+                </form>
+
+                <!-- QUICK QUESTIONS -->
+
+                <div class="quick-questions">
+
+                    <p>
+                        Quick questions
+                    </p>
+
+                    <div class="quick-question-list">
+
+                        <span>
+                            What events are available?
+                        </span>
+
+                        <span>
+                            Which events have seats?
+                        </span>
+
+                        <span>
+                            Tell me about AI & ML events.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </body>
+
+</html>

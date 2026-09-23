@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Admin Login - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+
+        <div class="admin-login-page">
+
+            <div class="admin-login-box">
+
+                <div class="admin-login-icon">
+                    🛡️
+                </div>
+
+                <h1>Admin Login</h1>
+
+                <p class="admin-login-subtitle">
+                    Access the AI EventHub admin panel.
+                </p>
+
+                {% if error %}
+                <div class="admin-login-error">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="POST">
+
+                    <div class="admin-login-field">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter username"
+                            required>
+
+                    </div>
+
+                    <div class="admin-login-field">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter password"
+                            required>
+
+                    </div>
+
+                    <button type="submit"
+                        class="admin-login-button">
+                        Login →
+                    </button>
+
+                </form>
+
+                <a href="{{ url_for('home') }}"
+                    class="admin-back-home">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+        <title>Admin Dashboard - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+
+        <nav class="top-navbar">
+
+            <div class="nav-container">
+
+                <div class="logo">
+                    AI EventHub
+                </div>
+
+                <div class="nav-menu">
+
+                    <a href="{{ url_for('home') }}">
+                        Home
+                    </a>
+
+                    <a href="{{ url_for('events') }}">
+                        Events
+                    </a>
+
+                    <a href="{{ url_for('assistant') }}">
+                        AI Assistant
+                    </a>
+
+                    <a href="{{ url_for('admin_logout') }}">
+                        Logout
+                    </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <main class="admin-section">
+
+            <!-- ADMIN HEADER -->
+
+            <div class="admin-header">
+
+                <div>
+
+                    <p class="admin-small-text">
+                        AI EventHub
+                    </p>
+
+                    <h1>
+                        Admin Dashboard
+                    </h1>
+
+                    <p>
+                        Monitor events, students and registrations.
+                    </p>
+
+                </div>
+
+                <div class="admin-header-actions">
+
+                    <a href="{{ url_for('add_event') }}">
+                        + Add Event
+                    </a>
+
+                    <a href="{{ url_for('participants') }}">
+                        Participants
+                    </a>
+
+                    <a href="{{ url_for('admin_logout') }}">
+                        Logout
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- STAT BOXES -->
+
+            <div class="admin-stats">
+
+                <div class="admin-stat-card">
+
+                    <span>
+                        Total Events
+                    </span>
+
+                    <strong>
+                        {{ event_count }}
+                    </strong>
+
+                </div>
+
+                <div class="admin-stat-card">
+
+                    <span>
+                        Total Students
+                    </span>
+
+                    <strong>
+                        {{ user_count }}
+                    </strong>
+
+                </div>
+
+                <div class="admin-stat-card">
+
+                    <span>
+                        Registrations
+                    </span>
+
+                    <strong>
+                        {{ registration_count }}
+                    </strong>
+
+                </div>
+
+                <div class="admin-stat-card">
+
+                    <span>
+                        Available Seats
+                    </span>
+
+                    <strong>
+                        {{ available_seats }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <!-- EVENT ANALYTICS -->
+
+            <div class="admin-table-container">
+
+                <div style="margin-bottom:20px;">
+
+                    <h2 style="color:#2563EB; margin-bottom:6px;">
+                        Event Analytics
+                    </h2>
+
+                    <p style="color:#64748b; margin:0;">
+                        Registration details for each event.
+                    </p>
+
+                </div>
+
+                <div class="analytics-grid">
+
+                    {% for event in events %}
+
+                    <div class="analytics-card">
+
+                        <div style="color:#64748b; font-size:13px;">
+                            {{ event["category"] }}
+                        </div>
+
+                        <h3>
+                            {{ event["title"] }}
+                        </h3>
+
+                        <p style="color:#64748b; font-size:13px;">
+                            {{ event["registered_count"] }}
+                            /
+                            {{ event["seats"] }}
+                            registered
+                        </p>
+
+                        {% if event["seats"]|int > 0 %}
+
+                        {% set percentage =
+                        (event["registered_count"] / event["seats"] *
+                        100)|round(1)
+                        %}
+
+                        {% else %}
+
+                        {% set percentage = 0 %}
+
+                        {% endif %}
+
+                        <div class="analytics-progress">
+
+                            <div
+                                class="analytics-progress-bar"
+                                style="width: {{ percentage }}%;">
+
+                            </div>
+
+                        </div>
+
+                        <p style="color:#64748b; font-size:13px;">
+
+                            {{ percentage }}% filled
+
+                            <br>
+
+                            {{ event["date"] }}
+
+                        </p>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            <!-- EVENT LIST -->
+
+            <div class="admin-table-container">
+
+                <h2 style="color:#2563EB;">
+                    Manage Events
+                </h2>
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Event
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Registered
+                            </th>
+
+                            <th>
+                                Seats
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for event in events %}
+
+                        <tr>
+
+                            <td>
+                                {{ event["title"] }}
+                            </td>
+
+                            <td>
+                                {{ event["category"] }}
+                            </td>
+
+                            <td>
+                                {{ event["date"] }}
+                            </td>
+
+                            <td>
+                                {{ event["registered_count"] }}
+                            </td>
+
+                            <td>
+                                {{ event["seats"] }}
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="{{ url_for('edit_event', event_id=event['id']) }}"
+                                    style="color:#2563EB; margin-right:10px; text-decoration:none;">
+
+                                    Edit
+
+                                </a>
+
+                                <a
+                                    href="{{ url_for('delete_event', event_id=event['id']) }}"
+                                    onclick="return confirm('Are you sure you want to delete this event?')"
+                                    style="color:#dc2626; text-decoration:none;">
+
+                                    Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- FOOTER -->
+
+            <div class="admin-footer">
+
+                <a href="{{ url_for('home') }}">
+                    ← Back to Home
+                </a>
+
+                <span>
+                    © 2026 AI EventHub
+                </span>
+
+            </div>
+
+        </main>
+
+    </body>
+
+</html>

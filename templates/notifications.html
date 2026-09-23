@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Notifications - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+
+        <nav class="navbar">
+            <div class="container navbar-inner">
+
+                <a href="{{ url_for('dashboard') }}" class="logo">
+                    AI EventHub
+                </a>
+
+                <div class="navbar-links">
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('events') }}">Events</a>
+                    <a href="{{ url_for('my_registrations') }}">My
+                        Registrations</a>
+                    <a href="{{ url_for('assistant') }}">AI Assistant</a>
+                    <a href="{{ url_for('notifications') }}">🔔
+                        Notifications</a>
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                </div>
+
+            </div>
+        </nav>
+
+        <main class="simple-page">
+
+            <div class="simple-box">
+
+                <div class="simple-box-header">
+
+                    <h1>🔔 Notifications</h1>
+
+                    <a href="{{ url_for('mark_all_notifications_read') }}"
+                        class="small-blue-btn">
+                        Mark All as Read
+                    </a>
+
+                </div>
+
+                <p class="simple-subtitle">
+                    You have {{ unread_count }} unread notification(s).
+                </p>
+
+                {% if notifications %}
+
+                <div class="notification-list">
+
+                    {% for notification in notifications %}
+
+                    <div class="notification-box
+                        {% if notification['is_read'] == 0 %}
+                            notification-unread
+                        {% endif %}">
+
+                        <div class="notification-icon">
+                            🔔
+                        </div>
+
+                        <div class="notification-content">
+
+                            <p>
+                                {{ notification["message"] }}
+                            </p>
+
+                            <small>
+                                {{ notification["created_at"] }}
+                            </small>
+
+                            {% if notification["is_read"] == 0 %}
+
+                            <a href="{{ url_for('mark_notification_read',
+                                    notification_id=notification['id']) }}"
+                                class="read-btn">
+                                Mark as Read
+                            </a>
+
+                            {% else %}
+
+                            <span class="read-text">
+                                Read
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+
+                <div class="empty-box">
+                    <div>🔔</div>
+                    <h3>No Notifications</h3>
+                    <p>You don't have any notifications yet.</p>
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 AI EventHub</p>
+        </footer>
+
+    </body>
+</html>

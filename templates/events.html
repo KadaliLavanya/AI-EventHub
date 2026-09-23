@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+        <title>Explore Events - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body>
+
+        <nav class="top-navbar">
+
+            <div class="nav-container">
+
+                <div class="logo">
+                    AI EventHub
+                </div>
+
+                <div class="nav-menu">
+
+                    <a href="{{ url_for('home') }}">Home</a>
+
+                    <a href="{{ url_for('events') }}">Events</a>
+
+                    <a href="{{ url_for('login') }}">Login</a>
+
+                    <a href="{{ url_for('register') }}">Register</a>
+
+                    <a href="{{ url_for('admin_login') }}">Admin</a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <main class="events-page">
+
+            <!-- EXPLORE EVENTS BOX -->
+
+            <div class="events-hero">
+
+                <h1>
+                    Explore Events
+                </h1>
+
+                <p>
+                    Find workshops, hackathons, coding contests and more.
+                </p>
+
+            </div>
+
+            <!-- FILTER BOX -->
+
+            <div class="filter-box">
+
+                <form method="GET"
+                    action="{{ url_for('events') }}">
+
+                    <div class="filter-grid">
+
+                        <div>
+
+                            <label>
+                                Search
+                            </label>
+
+                            <input
+                                type="text"
+                                name="search"
+                                value="{{ search }}"
+                                placeholder="Search events...">
+
+                        </div>
+
+                        <div>
+
+                            <label>
+                                Category
+                            </label>
+
+                            <select name="category">
+
+                                <option value>
+                                    All Categories
+                                </option>
+
+                                <option value="AI & ML"
+                                    {% if category == "AI & ML" %}selected{%
+                                    endif %}>
+                                    AI & ML
+                                </option>
+
+                                <option value="Web Development"
+                                    {% if category == "Web Development"
+                                    %}selected{% endif %}>
+                                    Web Development
+                                </option>
+
+                                <option value="Hackathon"
+                                    {% if category == "Hackathon" %}selected{%
+                                    endif %}>
+                                    Hackathon
+                                </option>
+
+                                <option value="Coding"
+                                    {% if category == "Coding" %}selected{%
+                                    endif %}>
+                                    Coding
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div>
+
+                            <label>
+                                Venue
+                            </label>
+
+                            <input
+                                type="text"
+                                name="venue"
+                                value="{{ venue }}"
+                                placeholder="Enter venue">
+
+                        </div>
+
+                        <div>
+
+                            <label>
+                                Date
+                            </label>
+
+                            <input
+                                type="date"
+                                name="date"
+                                value="{{ date }}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="filter-actions">
+
+                        <button type="submit">
+                            Search
+                        </button>
+
+                        <a
+                            href="{{ url_for('events') }}"
+                            class="btn-clear">
+
+                            Clear
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- RESULT COUNT -->
+
+            <div class="results-count">
+
+                {{ events|length }} events found
+
+            </div>
+
+            <!-- EVENTS -->
+
+            <div class="events-grid">
+
+                {% if events %}
+
+                {% for event in events %}
+
+                <div class="event-card">
+
+                    <h2>
+                        {{ event["title"] }}
+                    </h2>
+
+                    <p>
+                        {{ event["description"] }}
+                    </p>
+
+                    <div class="event-meta">
+
+                        <strong>
+                            Category:
+                        </strong>
+
+                        {{ event["category"] }}
+
+                        <br>
+
+                        <strong>
+                            Date:
+                        </strong>
+
+                        {{ event["date"] }}
+
+                        <br>
+
+                        <strong>
+                            Venue:
+                        </strong>
+
+                        {{ event["venue"] }}
+
+                        <br>
+
+                        <strong>
+                            Seats:
+                        </strong>
+
+                        {{ event["registered_count"] }}
+                        /
+                        {{ event["seats"] }}
+
+                    </div>
+
+                    <div class="event-actions">
+
+                        <a
+                            href="{{ url_for('event_details', event_id=event['id']) }}">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+                {% else %}
+
+                <div class="event-card">
+
+                    <h2>
+                        No Events Found
+                    </h2>
+
+                    <p>
+                        No events match your search criteria.
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </main>
+
+    </body>
+
+</html>

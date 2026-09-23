@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+        <title>{{ event["title"] }} - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+
+        <nav class="navbar">
+            <div class="container navbar-inner">
+
+                <a href="{{ url_for('dashboard') }}" class="logo">
+                    AI EventHub
+                </a>
+
+                <div class="navbar-links">
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('events') }}">Events</a>
+                    <a href="{{ url_for('my_registrations') }}">My
+                        Registrations</a>
+                    <a href="{{ url_for('assistant') }}">AI Assistant</a>
+                    <a href="{{ url_for('notifications') }}">🔔
+                        Notifications</a>
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                </div>
+
+            </div>
+        </nav>
+
+        <main class="simple-page">
+
+            <div class="simple-box event-detail-simple-box">
+
+                <span class="event-detail-category">
+                    {{ event["category"] }}
+                </span>
+
+                <h1>
+                    {{ event["title"] }}
+                </h1>
+
+                <div class="event-detail-description">
+                    {{ event["description"] }}
+                </div>
+
+                <div class="event-detail-grid">
+
+                    <div class="event-detail-info">
+                        <span>📅 Event Date</span>
+                        <strong>{{ event["date"] }}</strong>
+                    </div>
+
+                    <div class="event-detail-info">
+                        <span>📍 Venue</span>
+                        <strong>{{ event["venue"] }}</strong>
+                    </div>
+
+                    <div class="event-detail-info">
+                        <span>💺 Total Seats</span>
+                        <strong>{{ event["seats"] }}</strong>
+                    </div>
+
+                    <div class="event-detail-info">
+                        <span>✅ Available Seats</span>
+                        <strong>{{ available_seats }}</strong>
+                    </div>
+
+                </div>
+
+                <div class="event-detail-actions">
+
+                    {% if available_seats > 0 %}
+
+                    <a href="{{ url_for('register_event',
+                    event_id=event['id']) }}"
+                        class="main-blue-btn">
+                        Register for Event
+                    </a>
+
+                    {% else %}
+
+                    <button class="full-event-btn" disabled>
+                        Event Full
+                    </button>
+
+                    {% endif %}
+
+                    <a href="{{ url_for('events') }}"
+                        class="secondary-blue-btn">
+                        ← Back to Events
+                    </a>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 AI EventHub</p>
+        </footer>
+
+    </body>
+</html>

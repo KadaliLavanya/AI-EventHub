@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+        <title>Add New Event - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body>
+
+        <!-- NAVBAR -->
+
+        <nav class="top-navbar">
+
+            <div class="nav-container">
+
+                <div class="logo">
+                    AI EventHub
+                </div>
+
+                <div class="nav-menu">
+
+                    <a href="{{ url_for('home') }}">
+                        Home
+                    </a>
+
+                    <a href="{{ url_for('events') }}">
+                        Events
+                    </a>
+
+                    <a href="{{ url_for('login') }}">
+                        Login
+                    </a>
+
+                    <a href="{{ url_for('register') }}">
+                        Register
+                    </a>
+
+                    <a href="{{ url_for('admin') }}">
+                        Admin Dashboard
+                    </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <!-- ADD EVENT -->
+
+        <main class="page-container">
+
+            <div class="event-form-container">
+
+                <h1>
+                    Add New Event
+                </h1>
+
+                <p>
+                    Enter the event details below.
+                </p>
+
+                <form
+                    method="POST"
+                    action="{{ url_for('add_event') }}"
+                    class="event-form">
+
+                    <!-- TITLE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Event Title
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Enter event title"
+                            required>
+
+                    </div>
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Description
+                        </label>
+
+                        <textarea
+                            name="description"
+                            placeholder="Enter event description"
+                            required></textarea>
+
+                    </div>
+
+                    <!-- DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Event Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="date"
+                            required>
+
+                    </div>
+
+                    <!-- VENUE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Venue
+                        </label>
+
+                        <input
+                            type="text"
+                            name="venue"
+                            placeholder="Enter event venue"
+                            required>
+
+                    </div>
+
+                    <!-- CATEGORY -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select name="category" required>
+
+                            <option value>
+                                Select category
+                            </option>
+
+                            <option value="AI & ML">
+                                AI & ML
+                            </option>
+
+                            <option value="Web Development">
+                                Web Development
+                            </option>
+
+                            <option value="Hackathon">
+                                Hackathon
+                            </option>
+
+                            <option value="Coding">
+                                Coding
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- SEATS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Total Seats
+                        </label>
+
+                        <input
+                            type="number"
+                            name="seats"
+                            min="1"
+                            placeholder="Enter number of seats"
+                            required>
+
+                    </div>
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit">
+
+                        Add Event
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </main>
+
+    </body>
+
+</html>

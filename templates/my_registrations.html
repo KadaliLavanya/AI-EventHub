@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>My Registrations - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+
+        <nav class="navbar">
+            <div class="container navbar-inner">
+
+                <a href="{{ url_for('dashboard') }}" class="logo">
+                    AI EventHub
+                </a>
+
+                <div class="navbar-links">
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('events') }}">Events</a>
+                    <a href="{{ url_for('my_registrations') }}">My
+                        Registrations</a>
+                    <a href="{{ url_for('assistant') }}">AI Assistant</a>
+                    <a href="{{ url_for('notifications') }}">🔔
+                        Notifications</a>
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                </div>
+
+            </div>
+        </nav>
+
+        <main class="simple-page">
+
+            <div class="simple-box">
+
+                <div class="simple-box-header">
+
+                    <div>
+                        <h1>📋 My Registrations</h1>
+
+                        <p class="simple-subtitle">
+                            Events you have registered for.
+                        </p>
+                    </div>
+
+                    <a href="{{ url_for('events') }}"
+                        class="small-blue-btn">
+                        Explore Events
+                    </a>
+
+                </div>
+
+                {% if registrations %}
+
+                <div class="registration-list">
+
+                    {% for registration in registrations %}
+
+                    <div class="registration-box">
+
+                        <span class="registration-category">
+                            {{ registration["category"] }}
+                        </span>
+
+                        <h2>
+                            {{ registration["title"] }}
+                        </h2>
+
+                        <p>
+                            {{ registration["description"] }}
+                        </p>
+
+                        <div class="registration-info">
+
+                            <span>
+                                📅 {{ registration["date"] }}
+                            </span>
+
+                            <span>
+                                📍 {{ registration["venue"] }}
+                            </span>
+
+                        </div>
+
+                        <div class="registration-actions">
+
+                            <a href="{{ url_for('event_details',
+                                event_id=registration['event_id']) }}"
+                                class="secondary-blue-btn">
+                                View Details
+                            </a>
+
+                            <a href="{{ url_for('cancel_registration',
+                                event_id=registration['event_id']) }}"
+                                class="cancel-btn"
+                                onclick="return confirm('Are you sure you want to cancel this registration?')">
+                                Cancel Registration
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+
+                <div class="empty-box">
+                    <div>📋</div>
+                    <h3>No Registrations Yet</h3>
+                    <p>You have not registered for any event.</p>
+
+                    <a href="{{ url_for('events') }}"
+                        class="small-blue-btn">
+                        Explore Events
+                    </a>
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 AI EventHub</p>
+        </footer>
+
+    </body>
+</html>

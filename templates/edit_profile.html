@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title>Edit Profile - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body>
+
+        <nav>
+
+            <div class="logo">
+                AI EventHub
+            </div>
+
+            <div class="nav-links">
+
+                <a href="/dashboard">
+                    Dashboard
+                </a>
+
+                <a href="/events">
+                    Events
+                </a>
+
+                <a href="/profile">
+                    Profile
+                </a>
+
+                <a href="/logout">
+                    Logout
+                </a>
+
+            </div>
+
+        </nav>
+
+        <section class="profile-section">
+
+            <div class="profile-form-card">
+
+                <h1>
+                    Edit Profile ✏️
+                </h1>
+
+                <p>
+                    Update your student details.
+                </p>
+
+                <form method="POST">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ user['name'] }}"
+                        required>
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        value="{{ user['email'] }}"
+                        disabled>
+
+                    <label>
+                        Branch
+                    </label>
+
+                    <select name="branch">
+
+                        <option
+                            value="CSE"
+                            {% if user["branch"] == "CSE" %}selected{% endif %}>
+                            CSE
+                        </option>
+
+                        <option
+                            value="ECE"
+                            {% if user["branch"] == "ECE" %}selected{% endif %}>
+                            ECE
+                        </option>
+
+                        <option
+                            value="EEE"
+                            {% if user["branch"] == "EEE" %}selected{% endif %}>
+                            EEE
+                        </option>
+
+                        <option
+                            value="MECH"
+                            {% if user["branch"] == "MECH" %}selected{% endif
+                            %}>
+                            MECH
+                        </option>
+
+                        <option
+                            value="CIVIL"
+                            {% if user["branch"] == "CIVIL" %}selected{% endif
+                            %}>
+                            CIVIL
+                        </option>
+
+                    </select>
+
+                    <label>
+                        Year
+                    </label>
+
+                    <select name="year">
+
+                        <option
+                            value="1st Year"
+                            {% if user["year"] == "1st Year" %}selected{% endif
+                            %}>
+                            1st Year
+                        </option>
+
+                        <option
+                            value="2nd Year"
+                            {% if user["year"] == "2nd Year" %}selected{% endif
+                            %}>
+                            2nd Year
+                        </option>
+
+                        <option
+                            value="3rd Year"
+                            {% if user["year"] == "3rd Year" %}selected{% endif
+                            %}>
+                            3rd Year
+                        </option>
+
+                        <option
+                            value="4th Year"
+                            {% if user["year"] == "4th Year" %}selected{% endif
+                            %}>
+                            4th Year
+                        </option>
+
+                    </select>
+
+                    <label>
+                        Interest
+                    </label>
+
+                    <select name="interest">
+
+                        <option
+                            value="AI & ML"
+                            {% if user["interest"] == "AI & ML" %}selected{%
+                            endif %}>
+                            AI & ML
+                        </option>
+
+                        <option
+                            value="Web Development"
+                            {% if user["interest"] == "Web Development"
+                            %}selected{% endif %}>
+                            Web Development
+                        </option>
+
+                        <option
+                            value="Hackathon"
+                            {% if user["interest"] == "Hackathon" %}selected{%
+                            endif %}>
+                            Hackathon
+                        </option>
+
+                        <option
+                            value="Coding"
+                            {% if user["interest"] == "Coding" %}selected{%
+                            endif %}>
+                            Coding
+                        </option>
+
+                    </select>
+
+                    <button type="submit"
+                        class="event-btn">
+
+                        Save Changes
+
+                    </button>
+
+                    <a href="/profile"
+                        class="cancel-form-btn">
+
+                        Cancel
+
+                    </a>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </body>
+
+</html>

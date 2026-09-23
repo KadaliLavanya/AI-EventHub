@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Profile - AI EventHub</title>
+
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+
+        <nav class="navbar">
+            <div class="container navbar-inner">
+
+                <a href="{{ url_for('dashboard') }}" class="logo">
+                    AI EventHub
+                </a>
+
+                <div class="navbar-links">
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('events') }}">Events</a>
+                    <a href="{{ url_for('my_registrations') }}">My
+                        Registrations</a>
+                    <a href="{{ url_for('assistant') }}">AI Assistant</a>
+                    <a href="{{ url_for('notifications') }}">🔔
+                        Notifications</a>
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                </div>
+
+            </div>
+        </nav>
+
+        <main class="simple-page">
+
+            <div class="simple-box profile-simple-box">
+
+                <div class="simple-box-header">
+
+                    <div>
+                        <h1>👤 My Profile</h1>
+
+                        <p class="simple-subtitle">
+                            View your account details.
+                        </p>
+                    </div>
+
+                    <a href="{{ url_for('edit_profile') }}"
+                        class="small-blue-btn">
+                        Edit Profile
+                    </a>
+
+                </div>
+
+                <div class="profile-details">
+
+                    <div class="profile-detail-box">
+                        <span>Full Name</span>
+                        <strong>{{ user["name"] }}</strong>
+                    </div>
+
+                    <div class="profile-detail-box">
+                        <span>Email</span>
+                        <strong>{{ user["email"] }}</strong>
+                    </div>
+
+                    <div class="profile-detail-box">
+                        <span>Branch</span>
+                        <strong>{{ user["branch"] }}</strong>
+                    </div>
+
+                    <div class="profile-detail-box">
+                        <span>Year</span>
+                        <strong>{{ user["year"] }}</strong>
+                    </div>
+
+                    <div class="profile-detail-box">
+                        <span>Area of Interest</span>
+                        <strong>{{ user["interest"] }}</strong>
+                    </div>
+
+                </div>
+
+                <div class="profile-password-section">
+
+                    <a href="{{ url_for('change_password') }}"
+                        class="secondary-blue-btn">
+                        Change Password
+                    </a>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 AI EventHub</p>
+        </footer>
+
+    </body>
+</html>
