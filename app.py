@@ -223,49 +223,41 @@ def home():
 # =========================================================
 # STUDENT REGISTER
 # =========================================================
+# =========================
+# REGISTER
+# =========================
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
     if request.method == "POST":
 
-        name = request.form.get("name", "").strip()
-        email = request.form.get("email", "").strip().lower()
+        name = request.form["name"]
+        email = request.form["email"]
+
         password = request.form.get("password", "")
-        branch = request.form.get("branch", "").strip()
-        year = request.form.get("year", "").strip()
-        interest = request.form.get("interest", "").strip()
+        confirm_password = request.form.get("confirm_password", "")
 
-        if not name or not email or not password:
-            return render_template(
-                "register.html",
-                error="Please fill all required fields."
-            )
+        branch = request.form["branch"]
+        year = request.form["year"]
+        interest = request.form["interest"]
 
-        if len(password) < 6:
-            return render_template(
-                "register.html",
-                error="Password must contain at least 6 characters."
-            )
+        # Check password confirmation
+        if password != confirm_password:
+            return "Passwords do not match!"
 
         hashed_password = generate_password_hash(password)
 
-        conn = get_db_connection()
-
         try:
+
+            conn = get_db_connection()
 
             conn.execute("""
                 INSERT INTO users
-                (
-                    name,
-                    email,
-                    password,
-                    branch,
-                    year,
-                    interest
-                )
+                (name, email, password, branch, year, interest)
                 VALUES (?, ?, ?, ?, ?, ?)
-            """, (
+            """,
+            (
                 name,
                 email,
                 hashed_password,
@@ -281,15 +273,9 @@ def register():
 
         except sqlite3.IntegrityError:
 
-            conn.close()
-
-            return render_template(
-                "register.html",
-                error="Email already registered. Please login."
-            )
+            return "Email already registered!"
 
     return render_template("register.html")
-
 
 # =========================================================
 # STUDENT LOGIN
